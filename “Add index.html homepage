@@ -1,0 +1,14 @@
+index.html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fiery Sunset Ranch Bake Shop</title>
+  </head>
+  <body style="font-family:sans-serif;text-align:center;background:#FFF5E6;color:#3B2F2F">
+    <h1>🔥 Fiery Sunset Ranch Bake Shop</h1>
+    <p>Fresh sourdough, brioche, and pound cake made with love.</p>
+    <p>Online orders coming soon!</p>
+  </body>
+</html>
