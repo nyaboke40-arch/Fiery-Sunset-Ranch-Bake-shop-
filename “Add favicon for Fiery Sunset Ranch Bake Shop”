@@ -1,6 +1,0 @@
-assets/favicon.svg
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <circle cx="32" cy="32" r="32" fill="#D35400"/>
-  <text x="50%" y="54%" text-anchor="middle" font-family="Inter,Arial" font-size="28" fill="#fff" font-weight="800">FS</text>
-</svg>
-        
