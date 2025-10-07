@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Checkout • Fiery Sunset Ranch Bake Shop</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <style>
+    body {
+      font-family: "Inter", Arial, sans-serif;
+      background-color: #FFF5E6;
+      color: #3B2F2F;
+      margin: 0;
+      padding: 2rem;
+    }
+    h1 { color: #D35400; text-align: center; }
+    .cart {
+      max-width: 600px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 10px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    button {
+      background: #D35400;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    button:hover { background: #b84700; }
+  </style>
+</head>
+<body>
+  <h1>Checkout</h1>
+  <div class="cart">
+    <p><strong>Items:</strong> 1 × Country Sourdough — $8.00</p>
+    <p><strong>Total:</strong> $8.00</p>
+    <p>Choose a payment method:</p>
+    <button onclick="payWithPayPal()">💰 Pay with PayPal</button>
+    <button onclick="payWithStripe()">💳 Pay with Stripe</button>
+  </div>
+
+  <script>
+    const SERVER = 'https://fiery-sunset-server.onrender.com';
+
+    async function payWithPayPal() {
+      alert('Creating PayPal sandbox order...');
+      const res = await fetch(SERVER + '/api/create-paypal-order', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ items:[{id:'sourdough', qty:1}] })
+      });
+      const data = await res.json();
+      if (data.id) {
+        alert('Redirecting to PayPal sandbox...');
+        window.open('https://www.sandbox.paypal.com/checkoutnow?token=' + data.id, '_blank');
+      } else {
+        alert('Error creating PayPal order.');
+      }
+    }
+
+    async function payWithStripe() {
+      alert('Creating Stripe payment...');
+      const res = await fetch(SERVER + '/api/create-stripe-intent', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ items:[{id:'sourdough', qty:1}] })
+      });
+      const data = await res.json();
+      if (data.clientSecret) {
+        alert('Stripe PaymentIntent created successfully.');
+      } else {
+        alert('Error creating Stripe intent.');
+      }
+    }
+  </script>
+</body>
+</html>
+
+“Add checkout.html page with PayPal and Stripe test buttons”
